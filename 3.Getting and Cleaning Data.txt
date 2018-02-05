@@ -1,0 +1,6 @@
+https://data.baltimorecity.gov/
+
+raw data -> processing script -> tidy data	-> data analysis  -> data communication
+
+parse_number()		=>get only numerical characters from given object
+bind_rows()		=>combine two data frames together

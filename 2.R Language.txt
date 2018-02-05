@@ -1,0 +1,419 @@
+CMD+A, CMD+I => Indent code in RStudio
+Ctrl+L 		=>clear console window
+Turn off global debugging
+debuggingState(on=FALSE)
+
+Each probability distribution in R has an r*** function (for "random"), a d*** function (for "density"), a p*** (for "probability"), and q*** (for "quantile").
+All of the standard probability distributions are built into R, including exponential (rexp()), chi-squared (rchisq()), gamma (rgamma()), ....
+Advanced portions of graphics in R => lattice, ggplot2 and ggvis
+
+Swirl notes
+===========
+	install.packages("swirl")
+	packageVersion("swirl")  =>make sure you have version 2.2.21 or later.
+	library(swirl)			 =>Load swirl
+	install_from_swirl("R Programming")		=>Install the R Progroamming course
+	swirl()
+	
+You can use the `&` operator to evaluate AND across a vector. The `&&` version of only evaluates the first member of a vector.
+All AND operators are evaluated before OR operators.
+	isTRUE()		=>The function  takes one argument. If that argument evaluates to TRUE, the function will return TRUE.
+	identical()		=> will return TRUE if the two R objects passed to it as arguments are identical.
+	xor				=>exclusive OR. If one argument evaluates to TRUE and one argument evaluates to FALSE, 
+					then this function will return TRUE, otherwise it will return FALSE.
+   which() 			=>function takes a logical vector as an argument and returns the indices of the vector that are TRUE	
+   any()			=>function will return TRUE if one or more of the elements in the logical vector is TRUE. 
+   all() 			=>function will return TRUE if every element in the logical vector is TRUE.
+   mean() 			=>function takes a vector of numbers as input, and returns the average of all of the numbers in the input vector.
+						Ex: mean(c(2, 4, 5))
+  <functionname>	=>will return source code of the function
+	sum() 			=>returns the sum of a vector  
+						Ex: sum(c(1, 2, 3))
+	length() 		=>returns the size of a vector.
+						Ex: length(c(1, 2, 3))
+	range() 		=>returns the minimum and maximum of its first argument, which should be a numeric vector
+	unique()		=>returns a vector of only the 'unique' elements		
+	rm(functionname)=>clear custom defined function definition. can also use like as[Ex. rm(mean, envir = "<your_env>")]
+	sd(arg)			=>finding standard deviation
+ 	str() 			=>Display result in a more compact view, concise function for understanding the *str*ucture of your data 
+	apply()			=>Returns a vector or array or list of values obtained by applying a function to margins of an array or matrix
+	dim()			=>display dimension of an object
+	head()/tail()	=>Returns the first or last parts of a vector, matrix, table, data frame or function.
+	summary() 		=>provides different output for each variable and help us understand how the data are distributed.
+	gl()			=>
+	runif()			=>
+	colMeans()		=>
+	rowMeans()		=>	
+	interaction()	=>
+	hist()			=>plotting a histogram
+	solve()			=>Computing the inverse of a square matrix
+	invisible()		=>return value from function invisible mode(without printing in console)
+	table()			=>table uses the cross-classifying factors to build a contingency table of the counts at each combination of factor levels.
+	rbinom			=>binomial random variable 
+	rnorm()			=>standard normal distribution has mean 0 and standard deviation 1	
+	system.time()	=>allows you to test certain functions or code blocks to see if they are taking excessive amounts of time
+	Rprof()			=>Keep tracks of the function call stack at regular intervals(default sampling interval is 0.02 sec)
+	summaryRprof()	=>summarizes the output from Rprof()
+						by total	=>
+						by self		=>
+	object.size(<variablename>)			=>Provides how much space the dataset is occupying in memory
+	sample(1:20, 10, replace = TRUE)	=>randomly select four numbers between 1 and 6, WITH replacement. Sampling with replacement simply means that each number is "replaced" after it is selected, so that the same number can show up more than once.
+	set.seed(<value>)					=>to re-set seed to generate the same sequence of number which helps to re-produce issue.		
+	The easiest way to create a vector is with the c() function, which stands for 'concatenate' or 'combine'
+	Numeric vectors are the simplest type of data structure in R. In fact, even a single number is considered a vector of length one.
+	The simplest and most common data structure in R is the vector.
+	User-defined binary operators have the syntax: %[whatever]% =>where [whatever] represents any valid variable name.
+	all # arguments after an ellipses must have default values
+	modulus operator %% to find the remainder
+	R can also partially match arguments. Ex. can pass div instead of divisor(function(4, div = 2)).
+	If you find yourself working with dates and times often, you may want to check out the lubridate package by Hadley Wickham.
+	'Free' variable	=> It uses lexical scoping in which the sequence of environments to look in is determined when the function is defined, but the value is determined when the function is called.
+	You can use the $ operator --- e.g., file.info("mytest.R")$mode --- to grab specific items.
+	
+	When given two vectors of the same length, R simply performs the specified arithmetic operation (`+`, `-`, `*`, etc.) element-by-element. If the vectors are of different lengths, R 'recycles' the shorter vector until it is the same length as the longer vector.
+	Double quotes are used to distinguish character objects
+	
+Basic Building Blocks
+=====================
+	help.start()		=>more information on a particular topic related to R
+	sqrt()				=>To take the square root
+	abs()				=>to take the absolute value
+Workspace and Files
+===================	
+	getwd() 			=>Determine which directory your R session is using
+	ls()				=>List all the objects in your local workspace
+	args(functionname)  =>to examine the arguments of a function.
+	?command			=>get help page	
+	dir.create()		=>to create a directory in the current working directory
+	file.create()		=>to create a file in the current working directory
+	file.exists()		=>Check to see if file exists in the working directory
+	file.info()			=>Access information about the file
+	file.rename()		=>Renaming a file
+	file.copy()			=>Copying a file
+	file.path()			=>Construct the path to a file from components in a platform-independent way.
+	setwd(directoryname)		=>Set your working directory
+	list.files() or dir()		=>List all the files in your working directory
+
+Sequences of Numbers
+====================
+		:		=>simplest way to create a sequence of numbers in R
+				  could also use it to create a sequence of real numbers. For example, try pi:10. 
+				  for more help => ?`:`
+	  seq()		=>Another way to create a sequence of numbers in R
+				  seq(0, 10, by=0.5) => to increment by 0.5
+				  seq(5, 10, length=30)  =>get length of sequence withing the specified range
+				  seq(along.with = variablename)	=>create a sequence for the length of variablename
+				  seq_along(variablename)			=>Another way to create a sequence for the length of variablename
+	  rep()		=>replicate Ex.rep(0, times = 40)
+				  rep(c(0, 1, 2), each = 10)	=>Repeat each vector character N no.of times
+				  
+Vectors
+=======
+	Vectors come in two different flavors: atomic vectors and lists.
+	atomic vector		=>contains exactly one data type, 
+	list 				=>may contain multiple data types.
+	paste()				=>Concatenate Strings 
+						  paste("Hello", "world!", sep = " ") =>`sep` argument tells R that we want to separate the joined elements with a single space
+	c()					=>concatenate(join) a value with a vector
+
+Missing Values
+==============
+Missing values play an important role in statistics and data analysis. Often, missing values must not be ignored, 
+but rather they should be carefully studied to see if there's an underlying pattern or cause for their missingness.
+
+NA is not really a value and is used to represent any value that is 'not available' or 'missing' (in the statistical sense)
+NaN is 'not a number'  Ex. 0/0
+Inf is stands for infinity.
+	rnorm				=>standard normal distribution Ex.rnorm(1000)
+	is.na()				=>whether each element of a vector is NA
+	is.na(x)			=>tells us where the NAs are in a vector.
+	
+Subsetting Vectors
+==================
+Index vectors come in four different flavors -- logical vectors, vectors of positive integers, vectors of negative integers, and vectors of character strings
+	variablename[index]	=>to select some particular elements (i.e. a 'subset') from a vector
+						  Ex. x[1:10], x[is.na(x)], x[!is.na(x)]
+	x[c(-2, -10)] gives us all elements of x EXCEPT for the 2nd and 10 elements.
+	x[-c(2, 10)] to get the exact same result.
+	Named vectors		=>Ex. vect <- c(foo = 11, bar = 2, norf = NA)
+	names()				=>returns the names of vector
+	Assign names to vector 	=>names(vect2) <- c("foo", "bar", "norf")	
+	identical() 		=>check that 2 vectors are the same by passing them as arguments
+	variablename["name"]=>returns the value of a named vector
+	
+Matrices and Data Frames
+========================
+matrices can only contain a single class of data, while data frames can consist of many different classes of data.
+a matrix is simply an atomic vector with a dimension attribute. A more direct method of creating the same matrix uses the matrix() function.
+		dim()			=>function allows you to get OR set the `dim` attribute for an R object
+		attributes()	=>Another way to see dimension of a matrix 
+		matrix(data=1:20,nrow=4,ncol=5)		=>create a matrix with specified rows/cols
+		cbind() 		=>Take a sequence of vector, matrix or data-frame arguments and combine by columns or rows
+		data.frame()	=>creates data frames, tightly coupled collections of variables which share many of the properties of matrices and of lists
+		colnames		=>Retrieve or set the row or column names of a matrix-like object.
+		
+lapply and sapply
+=================
+			=>also known as loop functions
+			=>lapply returns a list of the same length as X, each element of which is the result of applying FUNC to the corresponding element of X.
+			=>sapply is a user-friendly version and wrapper of lapply by default returning a vector, matrix or, the same as lapply(x, f)
+			=>vapply() as a safer alternative to sapply() i.e we can specify result object type
+			=>tapply() to split your data into groups based on the value of some variable, then apply a function to each group.
+			=>mapply() is helpful for multiple list argument as input[similar to lapply() but with multiple list arguments]
+
+Generating Random Numbers
+=========================
+Probability distribution function usually have 4 functions associated with them
+	1) d for density
+	2) r for random number generation
+	3) p for cumulative distribution
+	4) q for quantile function
+	
+			
+*******************************************************************************************************************
+In R, everything is object
+To understand computations in R, two slogans are helpful: 
+	1. Everything that exists is an object. 
+	2. Everything that happens is a function call.
+	
+5 basic or "atomic" classes of objects
+======================================
+	1)Character
+	2)Numeric(real numbers)
+	3)integer
+	4)complex
+	5)logical(True/False)
+
+Attributes
+==========
+	1)Names, dimnames
+	2)dimensions(e.g. matrices, arrays)
+	3)class
+	4)length
+	5)Other user-defined attributes/metadata
+	
+The most basic object is Vector
+A Vector can only contain objects of the same class(List is an exception which is represented as a Vector but can contain objects of different classes)
+Numbers are generally treated as numberic objects(i.e double precision)
+Integer should be explicitly specified using L suffix
+Inf			=>It is a special number to represent infinity.
+			(e.g. 1/0;Inf can be used in ordinary calculations e.g 1/Inf is 0)	
+NaN			=>Not a number(e.g. 0/0 and also be thought of as a missing value)
+
+
+vector()	=>Empty vectors will be created
+attributes()=>access attributes of an object
+getwd()		=>Get working directory
+<-			=>Assignment operator
+#			=>Indicates comment
+x <- 1:20	=>Create a sequence
+c()			=>create vectors of objects[x <- c(0.5,0.6) ##numberic]
+vector()	=>create vector of objects[x <- vector("numberic, length=10)]
+			
+Mixing objects
+==============
+y <- c(1.7,"a")		=>When different objects are mixed in a vector then coercion occurs[will not give you an error but 
+					what will happen is that it will coerce the vector to be the, the class that's kind of the least common denominator.]
+					
+Explicit coercion
+=================
+Explicit coercion can be done using the as.* functions, if available
+Nonsensical coercion results in NA
+
+List
+====
+	x <- list(1,"a",TRUE,1+4i)
+	=>elements of a list will have double brackets around them elements of other vectors just have the single brackets, so that's one way to separate a list from other types of vectors 
+	
+Matrices
+========
+Matrices are vectors with a dimension attribute.
+	1) m <- matrix(nrow = 2, ncol = 3)
+		dim(m)
+		attributes(m)
+	2)m <- matrix(1:6, nrow = 2, ncol = 3)
+	3)m <- 1:10
+		dim(m) <- c(2,5)
+	4) x <- 1:3
+	   y <- 10:12
+	   cbind(x,y)
+	   rbind(x,y)
+	   
+Factors
+=======
+Factors are used to represent categorical data. can be ordered or unordered. 
+One can think of a factor as an integer vector where each integer has a label.
+
+Factors are treated specially by modelling functions like lm() and glm()
+	x <- factor(c("yes","no","yes", "yes", "no"))
+	table(x)
+	unclass(x)
+	attr(, "levels")
+	Level will be baselined by alphabetical order and can it as like as below
+		x <- factor(c("yes","no","yes", "yes", "no"),
+					levels = c("yes","no"))
+
+Missing Values
+==============
+Missing values are denoted by NA or NaN
+is.na()	 is used to test objects if they are NA
+is.nan() is used to test objects if they are NaN
+NA values have a class also, so there are integer NA, character NA, etc
+a NaN value is also NA but the converse is not true
+	x <- c(1,2,NaN,NA,4)
+	is.na(x)
+	[1]	FALSE FALSE TRUE TRUE FALSE
+	
+Data Frame
+==========
+Used to store tabular data and usually created by calling read.table() or read.csv()
+can be converted to a matrix by calling data.matrix()
+Data drames also have a special attribute called row.names
+	x <- data.frame(foo = 1:4, bar=c(T,T,T,F))
+	nrow(x) => returns # of rows
+	ncol(x) => returns # of cols
+
+Names
+======
+R objects(List, Matrices, etc) can also have names, which is very useful for wtiting readable code
+
+Reading tabular data
+=====================
+read.table, read.csv, for reading tabular data
+readLines, for reading lines of a text file
+source, for reading in R code files(inverse of dump)
+dget, for reading in R code files(inverse of dput)
+load, for reading in saved workspace
+unserialize, for reading single R objects in binary form
+
+Tips to read large datasets
+===========================
+Specify coloumn type which will avoid R to check each and every row object type and helps 2 times faster.
+Calculate memory requirements => it would be good to have 2 times of memory space than object requires
+							(i.e. if object requires 2gb then it is good to have atleast 4 gb RAM, it is bcoz table.read() 
+							requires some amount of space to read the data into memory)
+
+Textual Formats
+===============
+dumping and dputting are useful because the resulting textual format is edit-able and also it preserve the metadata
+dget vs dump	=>dget is used on a single R object versus dump can be used on multiple R objects
+
+Connections
+===========
+Data are read in using connection interfaces
+	1) file, opens a connection to a file
+	2)gzfile, opens a connection to a file compressed with gzip
+	3)bzfile, opens a connection to a file compressed with bzip2
+	4)url, opens a connection to a webpage
+	
+Subsetting
+==========
+There are a number of operators that can be used to extract subsets of R objects
+	[ => always returns an object of the same class as the original;
+		 can be used to select more than one element
+	[[ => is used to extract elements of a list or a data frame; it can only be used to extract a single element 
+		  and the class of the returned object will not necessarily be a list or data frame
+	$	=> is used to extract elements of a list or data frame by name; semantics are similar to hat of [[.
+	subset()	=>
+	Numeric index
+	-------------
+		x <- c("a","b","c","a")
+		x[1] or x[1:4]
+	Logical index
+	-------------
+		x[x > "a"]
+
+If you want to extract multiple objects we should use single [] operators
+If you compute the index that want to use, you should use single [[]] operators rather than $.[bcoz $ uses literal name]
+
+Matrices can be subsetted in usual way with (i,j) type indices.
+indices can also be missing(eg. x[1, ])
+	=> By default drop flag is true and it drops the dimension 
+
+Partial matching
+----------------
+partial matching of names is allowed with [[ and $.
+	=>should exact=false flag to get partial match object with [[.
+	
+Removing missing(NA) values
+---------------------------
+	=>complete.cases function helps to remove all the missing values in multiple sets of vectors or data frames
+
+Vectorized matrix operations
+----------------------------	
+Many operations in R are vectorized making code more efficient, concise, and easier to read.
+X * Y		=>element-wise multiplication
+X %*% Y	=>symbol for a matrix multiplication
+
+Explore
+-------
+Suppose I have a vector x <- c(3, 5, 1, 10, 12, 6) and 
+I want to set all elements of this vector that are less than 6 to be equal to zero. 
+What R code achieves this? Select all that apply.
+x[x %in% 1:5] <- 0
+
+
+Control Structures
+==================
+	=>if, else
+	=>for
+	=>while
+	=>repeat (infinity loop)
+	=>break  (exit from a loop)
+	=>next(is used to skip an iteration of a loop; it is similar to Skip in other programming languages)
+	=>return (exit from a function)
+	
+	=>seq_along function will help get index of a vector and loop you through the sequence, 
+	=>seq_len() will help to get length of matrix
+	=>For loops can be nested, but nesting beyond 2-3 levels id often very difficult to read/understand.
+	
+Functions
+=========
+	Functions are created using the function() directive and are stored as R objects
+	=>Function can be passed as arguments to other functions
+	=>Functions can be nested
+	=>The last expression in the function body will be evaluated
+	=>The formals function returns a list of all the formal arguments of a function
+	=>Arguments to functions are evaluated lazily, so they are evaluated only as needed
+	=> ... argument indicates a variable number of arguments that are usually passed on to other functions
+	
+	R uses lexical scoping or static scoping
+	ls(environment(variablename)	=> function will return scope of a variable 
+	class							=>returns type of object
+	unclass							=> returns class attribute/internal representation
+	
+Date/Time
+=========
+We can do mateematical operations on date times with +, -, ==,<= operators.
+	=>Dates are represented by the Date class
+	=>Times are represented by teh POSIXct and POSIXlt class
+	=>POSIXct is just a large integer under the hood, useful class when you want to store times in something like a data frame
+	=>POSIXlt is a list underneath and stores bunch of useful info like day of the month, day of the year, month, week.
+  Generic functions
+  ------------------  
+	=>weekdays
+	=>months
+	=>quarters
+	Sys.Date()	=>gives current system date
+	Sys.time()  =>gives current system time
+	strptime	=>Converts different date format to actual date object(?strptime for details about formatting strings)
+	difftime	=>find difference in units
+	
+Loop Functions and Debugging
+============================
+	lapply
+	sapply
+	apply
+	tapply
+	vapply
+	split 	=>Though it is not a loop function, which will handful when sometimes combining with lapply function.
+	
+Debugging tools
+===============
+	traceback()	=>print out the function call stack after an error occurs
+	debug		=>flags a function for "debug" mode which allows you to step through execution of a function one line at a time
+	browser		=>suspends the execution of a function wherever it is called and puts the function in debug mode
+	trace		=>allows you to insert debugging code into a function a specific places
+	recover		=>allows you to modify the error behavior so that you can browse the function call stack
+	
+	

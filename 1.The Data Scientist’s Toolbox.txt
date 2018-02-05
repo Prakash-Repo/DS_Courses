@@ -1,0 +1,204 @@
+R language
+*************************************************************************************************************************
+Some important R functions:
+===========================
+Access help file
+		=> ?rnorm	
+Search help files
+		=>help.search("rnorm")
+Get arguments
+		=>args("rnorm")
+function(n, mean=0, sd=1)
+NULL
+
+See code of a function
+======================
+just type the function name without brace
+ex: rnorm
+
+readLines can be useful for reading in lines of webpages
+
+Plotting systems in R
+=======================
+	base
+	lattice
+	ggplot2
+	
+Building Data Products content using interative apps => rCharts, Slidify, Shiny	
+packages provides machine learning functionality
+================================================
+rpart, kernallab, pamr
+
+Command line interfaces
+*************************************************************************************************************************
+we use Git bash command line interface for windows
+
+Root directory is represented as /
+Home directory is represented as ~
+pwd(print working directory) returns the path of working directory
+clear command will clear out CLI window
+ls 		=>list files and folders in the current directory
+ls-a 	=> list hidden files and folders
+ls-al 	=> list details for hidden files and folders
+cd arg 	=> takes you to the argument directory
+cd without arg	=> takes you to home directory
+cd.. 	=>takes you to one level up
+mkdir 	=> create a new directory
+touch	=>creates an empty file
+cp		=> Copy. ex: cp source_filename directory_path
+cp -r 	=> Copy one directory content to another. ex: cp source_directory target_directory
+rm		=>remove a file
+rm-r	=>remove a directory
+mv		=>move files between directories
+mv 		=>helps to rename a file as well.  ex: mv source_filename new_filename
+echo	=>print our the argument value
+date	=>echo date
+
+Git
+===
+Git is a distributed version control systems
+
+GitHub
+======
+It is a web-based hosting service for software development projects that use the Git revision control system.
+
+Creating a local copy
+=====================
+Open Git Bash
+Create a directory
+	$ mkdir ~/test-repo
+Navigate to this new directory
+	$ cd ~/test-repo
+Initialize a local Git repository in this directory
+	$ git init
+Point your local repository at the remote repository
+	$ git remote add origin https://github.com/<yourusername>/test-repo.git
+	
+Clone the Repo
+==============
+$ git clone https://github.com/<yourusername>/repoName.git
+
+Adding
+======
+
+git add .   => Adds all new files
+git add -u	=>updates tracking for files that changed names or were deleted
+git add -a 	=>does both of the previous steps in one command
+git ls-files -m 	=>To show all modified files
+It should be done before committing
+git diff head .\README.md	=>To check difference in file
+git diff head					=>You can compare not just a single file, but all your changes at once(don’t mention any file name)
+git diff HEAD [filename]		=>  compare the working directory with local repository.
+git diff [filename]				=>compare the working directory with index.
+git diff --cached [filename]	=>compare the index with local repository.
+git config user.name			=>show your Git username for the current repository
+git config user.email			=>show your Git email for the current repository	
+git config --list				=>show your Git config for the current repository	
+git config --global user.name	=>show your Git username config your system
+git config user.name "username" =>Set your Git username for the current repository
+Committing
+===========
+git commit -m "message"		=>Commits to the local repo, not the remote repo on Github
+
+Push
+====
+git push	=>updates local commits on the remote Github
+
+Branch
+======
+git checkout -b branchname		=>Create a new branchname
+git branch		=>To See what branch you are on
+git checkout <branchname>		=>Switch back to respective branch
+
+Pull
+====
+If you want to merge in your changes into the other branch/repo,we should send a pull request.
+it is a feature of Github, not Git
+
+Markdown
+========
+It is just a text file and the file extension is .md
+it is formatted in a very specific and simple way that sites GitHub and 
+also R and R Studio can recognize and can be used to do a lot of different things
+
+Heading
+-------
+##This is a secondary heading
+###This is a teritary heading
+
+UnOrdered Lists
+--------------
+*first item in list
+*second item in list
+
+R Packages
+===========
+The primary location of R packages is CRAN[~5200 packages available]
+For Biological applications, many packages are available from the Bioconductor Project
+
+available.packages() =>Lists all the packages available
+a <- available.packages()
+head(rownames(a),3) ##Show the names of the first fe packages
+
+install.packages("packagename")	=>Any packages on which this package depends will be downloaded and installed
+
+install.packages(c("packagename1","packagename2","packagename3"))		=>Install multiple packages at one function
+
+Installing an R Packages from Bioconductor
+==========================================
+source("http://bioconductor.org/biocLite.R")
+biocLite()
+
+place the names of the R packages in a character vector
+biocLite(c("packagename1","packagename2"))
+
+Loading R Packages
+==================
+Installing a package doesit mean that all of the functions are immediately available to you. 
+You need to use the library command to tell R which packages to load in. 
+Note: Do not put the package name in quotes
+Any packages that need to be loaded as dependencis will be loaded first, before the named package is loaded
+
+library(packagename)
+
+So after you load a package the functions exported by that package will be attached at the top of the search list
+so what you can do is you can type ,
+library(ggplot2)
+Search() => see all of the functions that are part of the ggplot2 package
+
+Rtools
+=======
+Rtools is a collection of tools that are necessary for building R packages in Windows
+http://cran.r-project.org/bin/windows/Rtools
+
+Install devtools after Rtools installation completes
+find.package("devtools")   =>Find whether devtools installed or not
+install.packages("devtools")	=>install devtools
+find_rtools()   =>Returns TRUE in the console if Rtools installation worked properly
+
+Types of questions
+==================
+Descriptive 
+	=>Desscibe a set of data, the kind of data analysis performed 
+	ex: census data
+Exploratory 
+	=> Find relationships you don't know about
+	=> Exploratory models are good for discovering new connections
+	=>Usually not the final say
+	=>Should not be used for generalizing/predicting
+Inferential
+	=>Use a relatively small sample of data to say something about a bigger population
+	=>Inference is commonly the goal of statistical models
+Predictive
+	=>To use the data on some objects to predict values for another object
+	=>If X Predicts Y it does not mean that X causes Y
+Causal
+	=>To find out what happens to one variable when you make another variable change
+	=>Causal models are usually the "gold standard" for data analysis
+Mechanistic
+	=>Understand the exact changes in variables that lead to changes in other variables for individual objects
+	=>Incredibly hard to inferm except in simple situations
+	=>Rarely covered in data science
+
+
+
